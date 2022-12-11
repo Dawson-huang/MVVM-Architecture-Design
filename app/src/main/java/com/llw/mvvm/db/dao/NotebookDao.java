@@ -37,6 +37,14 @@ public interface NotebookDao {
     @Update
     Completable update(Notebook notebook);
 
+    /*
+     * 通过指定@Insert注解的onConflict来解决
+     * OnConflictStrategy.REPLACE:如果有老的数据存在则会进行替换,如果没有就插入
+     * OnConflictStrategy.ROLLBACK:如果有老的数据存在则会回滚事物,如果没有就插入
+     * OnConflictStrategy.ABORT:如果有老的数据存在则会终止事物,如果没有就插入
+     * OnConflictStrategy.FAIL:如果有老的数据存在则会提示插入数据失败,如果没有就插入
+     * OnConflictStrategy.IGNORE:如果有老的数据存在则忽略当前数据,如果没有就插入
+     * */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insert(Notebook notebook);
 
